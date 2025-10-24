@@ -12,3 +12,12 @@ dependencies:
   - name: cluster-url-getter
     version: 0.1.0
     repository: "file://../../../helm/cluster-url-getter"
+  - name: create-model-registry
+    version: 0.0.1
+    repository: https://github.com/redhat-ai-americas/create-model-registry.git
+  - name: 10-minio
+    version: 0.0.1
+    repository: "file://../../../helm/10-minio"
+  - name: 20-pipeline-server
+    version: 0.0.1
+    repository: "file://../../../helm/20-pipeline-server"

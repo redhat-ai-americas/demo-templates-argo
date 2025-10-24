@@ -1,0 +1,9 @@
+apiVersion: v2
+name: pipeline-server
+description: GitOps for deploying a Kubeflow Pipeline server in OpenShift AI.
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0.0"

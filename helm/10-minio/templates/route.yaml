@@ -1,0 +1,49 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: minio
+    app.kubernetes.io/component: minio
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/name: minio
+    app.kubernetes.io/part-of: minio
+    component: minio
+  name: minio-console
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  port:
+    targetPort: console
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: minio
+    weight: 100
+  wildcardPolicy: None
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: minio
+    app.kubernetes.io/component: minio
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/name: minio
+    app.kubernetes.io/part-of: minio
+    component: minio
+  name: minio-s3
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  port:
+    targetPort: api
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: minio
+    weight: 100
+  wildcardPolicy: None

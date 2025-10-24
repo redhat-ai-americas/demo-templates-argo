@@ -1,7 +1,7 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: cluster-url-getter
+  name: cluster-url-getter-{{ .Release.Namespace }}
   namespace: {{ .Release.Namespace }}
   annotations:
     argocd.argoproj.io/sync-wave: "-10"
@@ -18,7 +18,7 @@ rules:
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: cluster-url-getter
+  name: cluster-url-getter-{{ .Release.Namespace }}
   namespace: openshift-console
   annotations:
     argocd.argoproj.io/sync-wave: "-10"

@@ -1,0 +1,6 @@
+cluster-url-getter:
+  enabled: true
+
+buckets:
+  models: models
+  pipelineArtifacts: pipeline-artifacts

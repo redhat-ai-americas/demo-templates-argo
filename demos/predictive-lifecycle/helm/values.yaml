@@ -1,0 +1,3 @@
+minio:
+  cluster-url-getter:
+    enabled: false  # This only applies to the copy of the url-getter in the subhcart, not the direct dependency.
