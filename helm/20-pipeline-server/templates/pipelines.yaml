@@ -34,7 +34,7 @@ spec:
     externalStorage:
       basePath: ''
       bucket: pipeline-artifacts
-      host: minio-s3{{ (lookup "v1" "Secret" .Release.Namespace "cluster-url").data.BASE_URL | b64dec }}
+      host: minio-s3.svc.cluster.local
       port: ''
       region: us-east-1
       s3CredentialsSecret:
