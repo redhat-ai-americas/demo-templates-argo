@@ -14,7 +14,7 @@ dependencies:
     repository: "file://../../../helm/cluster-url-getter"
   - name: create-model-registry
     version: 0.0.1
-    repository: https://github.com/redhat-ai-americas/create-model-registry.git
+    repository: git+https://github.com/redhat-ai-americas/create-model-registry.git
   - name: 10-minio
     version: 0.0.1
     repository: "file://../../../helm/10-minio"
