@@ -22,5 +22,5 @@ spec:
             name: cluster-url-getter
             defaultMode: 0755
       restartPolicy: Never
-      serviceAccountName: cluster-url-getter
+      serviceAccountName: cluster-url-getter-{{ .Release.Namespace }}
   backoffLimit: 1
