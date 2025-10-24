@@ -4,6 +4,7 @@ metadata:
   name: url-getter-job
   namespace: {{ .Release.Namespace }}
   annotations:
+    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
 spec:
   template:

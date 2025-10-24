@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: cluster-url-getter
   annotations:
+    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
 data:
   create_secret.sh: |-
