@@ -25,22 +25,22 @@ spec:
         - command:
             - python
             - /scripts/create_bucket.py
-      envFrom:
-      - secretRef:
-          name: minio-root-user
-      env:
-        - name: MODEL_BUCKET
-          value: {{ .Values.buckets.models }}
-        - name: PIPELINE_ARTIFACTS_BUCKET
-          value: {{ .Values.buckets.pipelineArtifacts }}
-      imagePullPolicy: IfNotPresent
-      name: create-buckets
-      restartPolicy: Never
-      volumeMounts:
-        - name: scripts
-          mountPath: /scripts
-      volumes:
-        - name: scripts
-          configMap:
-            name: create-bucket
-            defaultMode: 0755
+          envFrom:
+          - secretRef:
+              name: minio-root-user
+          env:
+            - name: MODEL_BUCKET
+              value: {{ .Values.buckets.models }}
+            - name: PIPELINE_ARTIFACTS_BUCKET
+              value: {{ .Values.buckets.pipelineArtifacts }}
+          imagePullPolicy: IfNotPresent
+          name: create-buckets
+          restartPolicy: Never
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+          volumes:
+            - name: scripts
+              configMap:
+                name: create-bucket
+                defaultMode: 0755
