@@ -4,5 +4,5 @@ cluster-url-getter:
 buckets:
   models: models
   pipelineArtifacts: pipeline-artifacts
-  rootUser: minio
-  rootPassword: minio!23
+  rootUser: ''
+  rootPassword: ''

@@ -14,6 +14,18 @@ spec:
       parameters:
         - name: channel
           value: fast
+        - name: create-model-registry.mysql.user
+          value: registryuser
+        - name: create-model-registry.mysql.password
+          value: registrypass
+        - name: create-model-registry.mysql.database
+          value: registrydb
+        - name: create-model-registry.mysql.root_password
+          value: registrypass
+        - name: minio.buckets.rootUser
+          value: minio
+        - name: minio.buckets.rootPassword
+          value: minio!23
   sources: []
   project: default
   syncPolicy:
