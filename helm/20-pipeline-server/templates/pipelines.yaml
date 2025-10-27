@@ -42,7 +42,7 @@ spec:
         secretKey: AWS_SECRET_ACCESS_KEY
         secretName: pipeline-artifacts
       scheme: http
-      port: 9000
+      port: "9000"
   persistenceAgent:
     deploy: true
     numWorkers: 2
