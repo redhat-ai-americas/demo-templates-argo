@@ -25,6 +25,8 @@ spec:
         - command:
             - python
             - /scripts/create_bucket.py
+          command: ["/bin/sh"]
+          args: ["-c", "pip install boto3==1.40.59; python /scripts/create_bucket.py"]
           envFrom:
           - secretRef:
               name: minio-root-user
@@ -34,13 +36,14 @@ spec:
             - name: PIPELINE_ARTIFACTS_BUCKET
               value: {{ .Values.buckets.pipelineArtifacts }}
           imagePullPolicy: IfNotPresent
+          image: registry.redhat.io/rhel9/python-312-minimal
           name: create-buckets
-          restartPolicy: Never
           volumeMounts:
             - name: scripts
               mountPath: /scripts
-          volumes:
-            - name: scripts
-              configMap:
-                name: create-bucket
-                defaultMode: 0755
+      restartPolicy: Never
+      volumes:
+        - name: scripts
+          configMap:
+            name: create-bucket
+            defaultMode: 0755

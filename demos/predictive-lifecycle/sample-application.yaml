@@ -12,8 +12,6 @@ spec:
     targetRevision: HEAD
     helm:
       parameters:
-        - name: channel
-          value: fast
         - name: create-model-registry.mysql.user
           value: registryuser
         - name: create-model-registry.mysql.password
