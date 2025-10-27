@@ -1,0 +1,7 @@
+minio:
+  enabled: true
+  cluster-url-getter:
+    enabled: false # Redundant with below
+
+cluster-url-getter:
+  enabled: false
