@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+data:
+  init.sql: |
+    \c {{ .Values.database.database }}
+    CREATE SCHEMA {{ .Values.database.schema }} AUTHORIZATION {{ .Values.database.user }};
+    create table {{ .Values.database.schema }}.{{ .Values.database.table }}
+    (
+        {{- range $index, $element := .Values.database.columns }}
+        {{ $element.name }}: {{ $element.type }}{{- if ne $index (sub (len .Values.database.columns) 1) -}},{{- end -}}
+        {{- end }}
+    );
+    ALTER DATABASE {{ .Values.database.database }} OWNER TO {{ .Values.database.user }};
+    GRANT ALL PRIVILEGES ON DATABASE {{ .Values.database.database }} TO {{ .Values.database.user }};
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA {{ .Values.database.schema }} TO {{ .Values.database.user }};

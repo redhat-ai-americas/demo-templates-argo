@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: postgresql-data
+    app.kubernetes.io/component: postgresql-data
+    app.kubernetes.io/instance: postgresql-data
+    app.kubernetes.io/name: postgresql-data
+    app.kubernetes.io/part-of: postgresql-data
+    component: postgresql-data
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: postgresql-data
+  namespace: {{ .Release.Name }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

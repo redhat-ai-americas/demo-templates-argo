@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data-generation-scripts
+  annotations:
+    argocd.argoproj.io/sync-wave: "110"
+data:
+  generate_data.ipynb: |-
+    {{ .Files.Get "files/generate_data.ipynb" | nindent 4 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: build-model-scripts
+  annotations:
+    argocd.argoproj.io/sync-wave: "110"
+data:
+  pipeline.ipynb: |-
+    {{ .Files.Get "files/pipeline.ipynb" | nindent 4 }}
+  endpoint.ipynb: |-
+    {{ .Files.Get "files/endpoint.ipynb" | nindent 4 }}

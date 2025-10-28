@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-data-database
+  namespace: {{ .Release.Name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  backoffLimit: 5
+  selector: {}
+  template:
+    spec:
+      containers:
+      - args:
+        - -ec
+        - |-
+          psql postgresql://{{ .Values.database.user }}:{{ .Values.database.password }}@postgresql:5432/{{ .Values.database.database }} < /etc/config/init.sql
+          sleep 15
+        command:
+        - /bin/bash
+        image: "registry.redhat.io/rhel9/postgresql-16:9.6"
+        imagePullPolicy: IfNotPresent
+        name: create-database
+        volumeMounts:
+        - name: data-hoi
+          mountPath: /etc/config/
+      restartPolicy: OnFailure
+      volumes:
+      - name: data-hoi
+        configMap:
+          name: data-hoi

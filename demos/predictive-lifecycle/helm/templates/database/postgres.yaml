@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+  namespace: {{ .Release.Name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgresql
+  template:
+    metadata:
+      labels:
+        name: postgresql
+    spec:
+      volumes:
+        - name: postgresql-data
+          persistentVolumeClaim:
+            claimName: postgresql-data
+      containers:
+        - env:
+            - name: POSTGRESQL_USER
+              value: "{{ .Values.database.user }}"
+            - name: POSTGRESQL_PASSWORD
+              value: "{{ .Values.database.password }}"
+            - name: POSTGRESQL_DATABASE
+              value: {{ .Release.Name }}
+          image: "registry.redhat.io/rhel9/postgresql-16:9.6"
+          imagePullPolicy: IfNotPresent
+          name: postgresql
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command:
+                - /usr/libexec/check-container
+                - --live
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - /usr/libexec/check-container
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 1Gi
+            limits:
+              cpu: "500m"
+              memory: 1Gi
+          volumeMounts:
+            - name: postgresql-data
+              mountPath: /var/lib/pgsql/data

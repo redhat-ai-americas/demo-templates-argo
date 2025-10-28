@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    openshift.io/description: ""
+    openshift.io/display-name: build-model-storage
+    argocd.argoproj.io/sync-wave: "110"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    opendatahub.io/dashboard: "true"
+  name: build-model-storage
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    openshift.io/description: ""
+    openshift.io/display-name: data-generation-storage
+    argocd.argoproj.io/sync-wave: "110"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    opendatahub.io/dashboard: "true"
+  name: data-generation-storage
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

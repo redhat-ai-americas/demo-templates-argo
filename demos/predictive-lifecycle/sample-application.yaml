@@ -24,6 +24,10 @@ spec:
           value: minio
         - name: minio.buckets.rootPassword
           value: minio!23
+        - name: database.user
+          value: myuser
+        - name: database.password
+          value: mypassword
   sources: []
   project: default
   syncPolicy:

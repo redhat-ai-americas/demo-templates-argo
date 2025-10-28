@@ -1,0 +1,13 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: postgres-creds
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+data:
+  DBNAME: {{ .Values.database.database | b64enc }}
+  HOST: {{ print "postgresql" | b64enc }}
+  PASSWORD: {{ .Values.database.password | b64enc }}
+  USER: {{ .Values.database.user | b64enc }}
+type: Opaque
