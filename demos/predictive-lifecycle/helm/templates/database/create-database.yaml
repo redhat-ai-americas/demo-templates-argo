@@ -22,10 +22,10 @@ spec:
         imagePullPolicy: IfNotPresent
         name: create-database
         volumeMounts:
-        - name: data-hoi
+        - name: data-{{ .Release.Name }}
           mountPath: /etc/config/
       restartPolicy: OnFailure
       volumes:
-      - name: data-hoi
+      - name: data-{{ .Release.Name }}
         configMap:
-          name: data-hoi
+          name: data-{{ .Release.Name }}
