@@ -32,7 +32,7 @@ spec:
           args:
             - -ec
             - |-
-              if [ ! -d /opt/app-root/src/scripts ] || [ -z $( ls -A /opt/app-root/src/scripts/ ) ]; then cp -R /scripts /opt/app-root/scripts/; fi
+              if [ ! -d /opt/app-root/src/scripts ] || [ -z $( ls -A /opt/app-root/src/scripts/ ) ]; then mkdir -p /opt/app-root/scripts; cp -R /scripts /opt/app-root/scripts/; fi
           volumeMounts:
             - name: scripts
               mountPath: /scripts
