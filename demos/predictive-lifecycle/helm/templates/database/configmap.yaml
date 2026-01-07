@@ -13,7 +13,7 @@ data:
     (
 {{ $columns := list -}}
 {{- range $index, $element := .Values.database.columns }}
-{{- $columns = append $columns (printf "        %s: %s" .name .type) -}}
+{{- $columns = append $columns (printf "        %s     %s" .name .type) -}}
 {{- end -}}
 {{ join ",\n" $columns }}
     );
