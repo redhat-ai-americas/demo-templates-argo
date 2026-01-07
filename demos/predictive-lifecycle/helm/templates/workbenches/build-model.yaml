@@ -74,7 +74,7 @@ spec:
                                   --ServerApp.password=''
                                   --ServerApp.base_url=/notebook/{{ .Release.Namespace }}/build-model
                                   --ServerApp.quit_button=False
-                                  --ServerApp.tornado_settings={"user":"kube-3aadmin","hub_host":"https://rhods-dashboard-redhat-ods-applications{{ (lookup "v1" "Secret" .Release.Namespace "urls").data.BASE_URL | b64dec }}","hub_prefix":"/projects/{{ .Release.Namespace }}"}
+                                  --ServerApp.tornado_settings={"user":"kube-3aadmin","hub_host":"https://rhods-dashboard-redhat-ods-applications{{ (lookup "v1" "Secret" .Release.Namespace "cluster-url").data.BASE_URL | b64dec }}","hub_prefix":"/projects/{{ .Release.Namespace }}"}
             - name: JUPYTER_IMAGE
               value: 'image-registry.openshift-image-registry.svc:5000/{{ .Values.workbench.image }}'
             - name: PIP_CERT
@@ -107,7 +107,7 @@ spec:
               name: elyra-dsp-details
           envFrom:
             - secretRef:
-                name: urls
+                name: cluster-url
             - secretRef:
                 name: postgres-creds
             - secretRef:
