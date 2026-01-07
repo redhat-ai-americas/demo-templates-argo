@@ -73,7 +73,6 @@ spec:
                                   --ServerApp.password=''
                                   --ServerApp.base_url=/notebook/{{ .Release.Namespace }}/data-generation
                                   --ServerApp.quit_button=False
-                                  --ServerApp.tornado_settings={"user":"kube-3aadmin","hub_host":"https://rhods-dashboard-redhat-ods-applications{{ (lookup "v1" "Secret" .Release.Namespace "cluster-url").data.BASE_URL | b64dec }}","hub_prefix":"/projects/{{ .Release.Namespace }}"}
             - name: JUPYTER_IMAGE
               value: 'image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/{{ .Values.workbench.image }}'
             - name: PIP_CERT
