@@ -11,9 +11,11 @@ data:
     CREATE SCHEMA {{ .Values.database.schema }} AUTHORIZATION {{ .Values.database.user }};
     create table {{ .Values.database.schema }}.{{ .Values.database.table }}
     (
-        {{- range $index, $element := .Values.database.columns }}
-        {{ $element.name }}: {{ $element.type }}{{- if ne $index (sub (len .Values.database.columns) 1) -}},{{- end -}}
-        {{- end }}
+{{ $columns := list -}}
+{{- range $index, $element := .Values.database.columns }}
+{{- $columns = append $columns (printf "        %s: %s" .name .type) -}}
+{{- end -}}
+{{ join ",\n" $columns }}
     );
     ALTER DATABASE {{ .Values.database.database }} OWNER TO {{ .Values.database.user }};
     GRANT ALL PRIVILEGES ON DATABASE {{ .Values.database.database }} TO {{ .Values.database.user }};
