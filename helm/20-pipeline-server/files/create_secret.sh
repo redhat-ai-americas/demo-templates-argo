@@ -8,7 +8,7 @@ done
 if oc get secret pipeline-url >/dev/null 2>&1; then
   oc delete secret pipeline-url
 fi
-oc create secret generic pipeline-url --from-literal=BASE_URL="$BASE_URL"
+oc create secret generic pipeline-url --from-literal=PIPELINES_URL="$PIPELINES_URL"
 
 if oc get secret my-token >/dev/null 2>&1; then
   oc delete secret my-token
