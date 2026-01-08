@@ -37,7 +37,7 @@ spec:
           volumeMounts:
             - name: scripts
               mountPath: /scripts
-            - name: data-generation-storage
+            - name: build-model-storage
               mountPath: /opt/app-root/src/
       containers:
         - resources:
