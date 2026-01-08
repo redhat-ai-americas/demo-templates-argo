@@ -1,5 +1,5 @@
 PIPELINES_URL=$(oc get route ds-pipeline-dspa -o go-template='{{if .spec.tls}}https://{{else}}http://{{end}}{{.spec.host}}{{"\n"}}')
-while [[ -n "$PIPELINES_URL" ]]
+while [[ -z "$PIPELINES_URL" ]]
 do
   sleep 5
   PIPELINES_URL=$(oc get route ds-pipeline-dspa -o go-template='{{if .spec.tls}}https://{{else}}http://{{end}}{{.spec.host}}{{"\n"}}')
