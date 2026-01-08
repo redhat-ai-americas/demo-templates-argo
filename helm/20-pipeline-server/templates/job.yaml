@@ -4,7 +4,6 @@ metadata:
   name: pipeline-integration-job
   namespace: {{ .Release.Namespace }}
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "21"
 spec:
   template:

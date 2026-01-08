@@ -3,7 +3,6 @@ kind: ConfigMap
 metadata:
   name: pipeline-integration
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "21"
 data:
   create_secret.sh: |-
