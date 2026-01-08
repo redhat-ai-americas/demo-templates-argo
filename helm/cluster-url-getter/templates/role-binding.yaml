@@ -36,7 +36,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: cluster-url-getter2-{{ .Release.Namespace }}
-  namespace: openshift-console
+  namespace: {{ .Release.Namespace }}
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
