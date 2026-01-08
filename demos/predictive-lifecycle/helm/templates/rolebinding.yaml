@@ -13,4 +13,4 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: registry-user-predictive-lifecycle
+  name: registry-user-{{ .Release.Name }}
