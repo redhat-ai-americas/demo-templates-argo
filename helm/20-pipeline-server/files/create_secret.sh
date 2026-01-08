@@ -1,5 +1,10 @@
 PIPELINES_URL=$(oc get route ds-pipeline-dspa -o go-template='{{if .spec.tls}}https://{{else}}http://{{end}}{{.spec.host}}{{"\n"}}')
-BASE_URL=.apps$(echo $PIPELINES_URL | sed 's/^.*apps//g')
+while [[ -z $PIPELINES_URL ]]
+do
+  sleep 5
+  PIPELINES_URL=$(oc get route ds-pipeline-dspa -o go-template='{{if .spec.tls}}https://{{else}}http://{{end}}{{.spec.host}}{{"\n"}}')
+done
+
 if oc get secret pipeline-url >/dev/null 2>&1; then
   oc delete secret pipeline-url
 fi
