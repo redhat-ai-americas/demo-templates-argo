@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pipeline-integration-job
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "21"
+spec:
+  template:
+    spec:
+      containers:
+        - name: installer
+          image: registry.redhat.io/openshift4/ose-cli:latest
+          command: ["/bin/bash", "-c", "/scripts/create_secret.sh"]
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      volumes:
+        - name: scripts
+          configMap:
+            name: pipeline-integration
+            defaultMode: 0755
+      restartPolicy: Never
+      serviceAccountName: cluster-url-getter-{{ .Release.Namespace }}
+  backoffLimit: 1

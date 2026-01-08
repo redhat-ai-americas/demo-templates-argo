@@ -108,11 +108,11 @@ spec:
               name: elyra-dsp-details
           envFrom:
             - secretRef:
-                name: cluster-url
+                name: pipeline-url
             - secretRef:
                 name: postgres-creds
             - secretRef:
-                name: my-token # FIXME!
+                name: my-token
           image: 'image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/{{ .Values.workbench.image }}'
           workingDir: /opt/app-root/src
         - resources:
