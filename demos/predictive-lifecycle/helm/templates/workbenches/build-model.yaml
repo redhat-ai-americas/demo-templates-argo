@@ -37,6 +37,8 @@ spec:
           volumeMounts:
             - name: scripts
               mountPath: /scripts
+            - name: data-generation-storage
+              mountPath: /opt/app-root/src/
       containers:
         - resources:
             limits:
@@ -110,7 +112,7 @@ spec:
             - secretRef:
                 name: postgres-creds
             - secretRef:
-                name: my-token
+                name: my-token # FIXME!
           image: 'image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/{{ .Values.workbench.image }}'
           workingDir: /opt/app-root/src
         - resources:
