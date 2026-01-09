@@ -34,7 +34,7 @@ spec:
             - -ec
             - |-
               if [ ! -d /opt/app-root/src/scripts ] || [ -z $( ls -A /opt/app-root/src/scripts/ ) ]; then cp -R /scripts /opt/app-root/src/; fi
-              sed -i "s/{{REGISTRY_NAME}}/$REGISTRY_NAME/g" /opt/app-root/src/scripts/pipeline.ipynb
+              sed -i "s/{REGISTRY_NAME}/$REGISTRY_NAME/g" /opt/app-root/src/scripts/pipeline.ipynb
           env:
             - name: REGISTRY_NAME
               value: {{ .Release.Name }}
