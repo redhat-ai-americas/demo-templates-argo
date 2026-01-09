@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-url-getter
+spec:
+  destination:
+    name: in-cluster
+    namespace: hoi-testing
+  source:
+    path: helm/cluster-url-getter/
+    repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
+    targetRevision: HEAD
+    helm: {}
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 10
+      backoff:
+        duration: 10s
+        factor: 3
+        maxDuration: 30m
+    managedNamespaceMetadata:
+      labels:
+        argocd.argoproj.io/managed-by: openshift-gitops

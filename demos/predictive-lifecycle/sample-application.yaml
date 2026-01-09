@@ -5,29 +5,52 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: hoi
+    namespace: hoi-testing
   source:
     path: demos/predictive-lifecycle/helm/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
     targetRevision: HEAD
     helm:
-      parameters:
-        - name: create-model-registry.mysql.user
-          value: registryuser
-        - name: create-model-registry.mysql.password
-          value: registrypass
-        - name: create-model-registry.mysql.database
-          value: registrydb
-        - name: create-model-registry.mysql.root_password
-          value: registrypass
-        - name: minio.buckets.rootUser
-          value: minio
-        - name: minio.buckets.rootPassword
-          value: minio!23
-        - name: database.user
-          value: myuser
-        - name: database.password
-          value: mypassword
+      valuesObject:
+        create-model-registry:
+          mysql:
+            user: registryuser
+            password: registrypass
+            database: registrydb
+            root_password: registrypass
+        minio:
+          buckets:
+            rootUser: minio
+            rootPassword: minio!23
+        database:
+          user: myuser
+          password: mypassword
+          database: hoi
+          schema: hoi
+          table: address_values
+          columns:
+          - name: address_id
+            type: INTEGER
+          - name: home_sq_ft
+            type: DECIMAL
+          - name: num_beds
+            type: DECIMAL
+          - name: basement_sq_ft
+            type: DECIMAL
+          - name: distance_to_nearest_fire_hydrant
+            type: DECIMAL
+          - name: time_since_last_claim
+            type: INTEGER
+          - name: distance_from_emergency_systems
+            type: DECIMAL
+          - name: fire_extinguisher_in_house
+            type: INTEGER
+          - name: hoi_monthly_cost
+            type: DECIMAL
+          - name: event_timestamp
+            type: TIMESTAMP
+          - name: created
+            type: TIMESTAMP
   sources: []
   project: default
   syncPolicy:
