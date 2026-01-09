@@ -34,6 +34,10 @@ spec:
             - -ec
             - |-
               if [ ! -d /opt/app-root/src/scripts ] || [ -z $( ls -A /opt/app-root/src/scripts/ ) ]; then cp -R /scripts /opt/app-root/src/; fi
+              cat /opt/app-root/src/pipeline.ipynb | sed "s/${REGISTRY_NAME}/$REGISTRY_NAME/g" > /opt/app-root/src/pipeline.ipynb
+          env:
+            name: REGISTRY_NAME
+            value: {{ .Release.Name }}
           volumeMounts:
             - name: scripts
               mountPath: /scripts
@@ -109,6 +113,8 @@ spec:
           envFrom:
             - secretRef:
                 name: pipeline-url
+            - secretRef:
+                name: cluster-url
             - secretRef:
                 name: postgres-creds
             - secretRef:
