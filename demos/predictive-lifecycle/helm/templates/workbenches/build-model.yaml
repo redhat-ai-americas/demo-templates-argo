@@ -36,8 +36,8 @@ spec:
               if [ ! -d /opt/app-root/src/scripts ] || [ -z $( ls -A /opt/app-root/src/scripts/ ) ]; then cp -R /scripts /opt/app-root/src/; fi
               cat /opt/app-root/src/pipeline.ipynb | sed "s/${REGISTRY_NAME}/$REGISTRY_NAME/g" > /opt/app-root/src/pipeline.ipynb
           env:
-            name: REGISTRY_NAME
-            value: {{ .Release.Name }}
+            - name: REGISTRY_NAME
+              value: {{ .Release.Name }}
           volumeMounts:
             - name: scripts
               mountPath: /scripts
