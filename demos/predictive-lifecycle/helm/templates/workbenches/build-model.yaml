@@ -35,9 +35,12 @@ spec:
             - |-
               if [ ! -d /opt/app-root/src/scripts ] || [ -z $( ls -A /opt/app-root/src/scripts/ ) ]; then cp -R /scripts /opt/app-root/src/; fi
               sed -i "s/{REGISTRY_NAME}/$REGISTRY_NAME/g" /opt/app-root/src/scripts/pipeline.ipynb
+              sed -i "s/{NAMESPACE}/$NAMESPACE/g" /opt/app-root/src/scripts/endpoint.ipynb
           env:
             - name: REGISTRY_NAME
               value: {{ .Release.Name }}
+            - name: NAMESPACE
+              value: {{ .Release.Namespace }}
           volumeMounts:
             - name: scripts
               mountPath: /scripts
