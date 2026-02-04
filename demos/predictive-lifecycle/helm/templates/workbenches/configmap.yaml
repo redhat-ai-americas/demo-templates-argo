@@ -19,3 +19,37 @@ data:
     {{ .Files.Get "files/pipeline.ipynb" | nindent 4 }}
   endpoint.ipynb: |-
     {{ .Files.Get "files/endpoint.ipynb" | nindent 4 }}
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: build-model-kube-rbac-proxy-config
+  namespace: hoi-testing
+  labels:
+    notebook-name: build-model
+data:
+  config-file.yaml: |-
+    authorization:
+      resourceAttributes:
+        verb: get
+        resource: notebooks
+        apiGroup: kubeflow.org
+        name: build-model
+        namespace: hoi-testing
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: data-generation-kube-rbac-proxy-config
+  namespace: hoi-testing
+  labels:
+    notebook-name: data-generation
+data:
+  config-file.yaml: |-
+    authorization:
+      resourceAttributes:
+        verb: get
+        resource: notebooks
+        apiGroup: kubeflow.org
+        name: data-generation
+        namespace: hoi-testing

@@ -2,7 +2,7 @@ apiVersion: kubeflow.org/v1
 kind: Notebook
 metadata:
   annotations:
-    notebooks.opendatahub.io/inject-oauth: 'true'
+    notebooks.opendatahub.io/inject-auth: 'true'
     opendatahub.io/image-display-name: {{ .Values.workbench.imageDisplayName }}
     opendatahub.io/accelerator-name: ''
     openshift.io/description: ''
@@ -134,8 +134,8 @@ spec:
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: /oauth/healthz
-              port: oauth-proxy
+              path: /healthz
+              port: 8444
               scheme: HTTPS
             initialDelaySeconds: 5
             periodSeconds: 5
@@ -145,8 +145,8 @@ spec:
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: /oauth/healthz
-              port: oauth-proxy
+              path: /healthz
+              port: 8444
               scheme: HTTPS
             initialDelaySeconds: 30
             periodSeconds: 5
@@ -163,12 +163,10 @@ spec:
               protocol: TCP
           imagePullPolicy: Always
           volumeMounts:
-            - mountPath: /etc/oauth/client
-              name: oauth-client
-            - mountPath: /etc/oauth/config
-              name: oauth-config
+            - mountPath: /etc/kube-rbac-proxy
+              name: kube-rbac-proxy-config
             - mountPath: /etc/tls/private
-              name: tls-certificates
+              name: kube-rbac-proxy-tls
           image: 'registry.redhat.io/openshift4/ose-oauth-proxy@sha256:4f8d66597feeb32bb18699326029f9a71a5aca4a57679d636b876377c2e95695'
           args:
             - '--provider=openshift'
@@ -211,18 +209,14 @@ spec:
           secret:
             optional: true
             secretName: ds-pipeline-config
-        - name: oauth-config
+        - name: kube-rbac-proxy-config
+          configMap:
+            defaultMode: 420
+            name: build-model-kube-rbac-proxy-config
+        - name: kube-rbac-proxy-tls
           secret:
             defaultMode: 420
-            secretName: build-model-oauth-config
-        - name: oauth-client
-          secret:
-            defaultMode: 420
-            secretName: build-model-oauth-client
-        - name: tls-certificates
-          secret:
-            defaultMode: 420
-            secretName: build-model-tls
+            secretName: build-model-kube-rbac-proxy-tls
         - name: scripts
           configMap:
             name: build-model-scripts
