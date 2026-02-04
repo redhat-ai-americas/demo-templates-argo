@@ -127,7 +127,7 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
-          name: oauth-proxy
+          name: kube-rbac-proxy
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -138,39 +138,29 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
-          env:
-            - name: NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
           ports:
             - containerPort: 8443
-              name: oauth-proxy
+              name: kube-rbac-proxy
               protocol: TCP
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /etc/kube-rbac-proxy
               name: kube-rbac-proxy-config
             - mountPath: /etc/tls/private
-              name: kube-rbac-proxy-tls
-          image: 'registry.redhat.io/openshift4/ose-oauth-proxy@sha256:4f8d66597feeb32bb18699326029f9a71a5aca4a57679d636b876377c2e95695'
+              name: kube-rbac-proxy-tls-certificates
+          image: 'registry.redhat.io/rhoai/odh-kube-auth-proxy-rhel9@sha256:1f4b2b9bb5061faf17299c2ae2405ab408e2b7ce349d9831eb6045990e6da005'
           args:
-            - '--provider=openshift'
-            - '--https-address=:8443'
-            - '--http-address='
-            - '--openshift-service-account=data-generation'
-            - '--cookie-secret-file=/etc/oauth/config/cookie_secret'
-            - '--cookie-expire=24h0m0s'
-            - '--tls-cert=/etc/tls/private/tls.crt'
-            - '--tls-key=/etc/tls/private/tls.key'
-            - '--upstream=http://localhost:8888'
-            - '--upstream-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
-            - '--email-domain=*'
-            - '--skip-provider-button'
-            - '--client-id=data-generation-{{ .Release.Namespace }}-oauth-client'
-            - '--client-secret-file=/etc/oauth/client/secret'
-            - '--scope=user:info user:check-access'
-            - '--openshift-sar={"verb":"get","resource":"notebooks","resourceAPIGroup":"kubeflow.org","resourceName":"data-generation","namespace":"$(NAMESPACE)"}'
+            - '--secure-listen-address=0.0.0.0:8443'
+            - '--upstream=http://127.0.0.1:8888/'
+            - '--logtostderr=true'
+            - '--v=10'
+            - '--proxy-endpoints-port=8444'
+            - '--config-file=/etc/kube-rbac-proxy/config-file.yaml'
+            - '--tls-cert-file=/etc/tls/private/tls.crt'
+            - '--tls-private-key-file=/etc/tls/private/tls.key'
+            - '--auth-header-fields-enabled=true'
+            - '--auth-header-user-field-name=X-Auth-Request-User'
+            - '--auth-header-groups-field-name=X-Auth-Request-Groups'
       enableServiceLinks: false
       serviceAccountName: data-generation
       volumes:
