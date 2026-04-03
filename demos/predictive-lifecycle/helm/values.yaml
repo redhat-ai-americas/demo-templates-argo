@@ -15,3 +15,9 @@ database:
   columns:
   - name: home_sq_ft
     type: DECIMAL
+
+trustyai:
+  database:
+    user: ''
+    password: ''
+    rootPassword: ''

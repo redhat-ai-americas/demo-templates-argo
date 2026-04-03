@@ -1,0 +1,9 @@
+apiVersion: v2
+name: cluster-monitoring
+description: GitOps for enabling cluster monitoring for a RHOAI installation.
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0.0"

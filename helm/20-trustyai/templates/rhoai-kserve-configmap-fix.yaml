@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: inferenceservice-config
+  namespace: redhat-ods-applications
+  annotations:
+    opendatahub.io/managed: 'false'
+data:
+  logger: '{"image": "registry.redhat.io/rhoai/odh-kserve-agent-rhel9@sha256:191aa92865c26ef1e5f9856a8ca91263782b4627db65bfcc61c9879537d34b0b", "memoryRequest": "100Mi", "memoryLimit": "1Gi", "cpuRequest": "100m", "cpuLimit": "1", "defaultUrl": "http://default-broker", "caBundle": "kserve-logger-ca-bundle", "caCertFile": "service-ca.crt", "tlsSkipVerify": false}'

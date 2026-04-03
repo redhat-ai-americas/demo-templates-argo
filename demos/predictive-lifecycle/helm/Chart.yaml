@@ -21,3 +21,6 @@ dependencies:
   - name: pipeline-server
     version: 0.1.0
     repository: "file://../../../helm/20-pipeline-server"
+  - name: trustyai
+    version: 0.1.0
+    repository: "file://../../../helm/20-trustyai"

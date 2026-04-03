@@ -1,0 +1,16 @@
+apiVersion: trustyai.opendatahub.io/v1
+kind: TrustyAIService
+metadata:
+  name: trustyai-service
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  data: {}
+  metrics:
+    schedule: 5s
+  storage:
+    databaseConfigurations: db-credentials
+    format: DATABASE
+    size: 1Gi

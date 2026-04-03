@@ -22,6 +22,11 @@ spec:
           buckets:
             rootUser: minio
             rootPassword: minio!23
+        trustyai:
+          database:
+            user: 'trusty'
+            password: 'trustypass'
+            rootPassword: 'trustypass'
         database:
           user: myuser
           password: mypassword
