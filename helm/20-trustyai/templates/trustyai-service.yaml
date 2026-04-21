@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "21"
 spec:
   data: {}
   metrics:

@@ -5,7 +5,7 @@ metadata:
   namespace: trusty
   annotations:
     argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "21"
   labels:
     app: trusty-{{ .Release.Name }}
     app.kubernetes.io/component: trusty
@@ -27,7 +27,7 @@ metadata:
   namespace: trusty
   annotations:
     argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "21"
   labels:
     app: trusty-{{ .Release.Name }}
     app.kubernetes.io/component: trusty
@@ -36,11 +36,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      deployment: trusty-{{ .Release.Name }}
+      name: trusty-{{ .Release.Name }}
   template:
+    metadata:
+      labels:
+        name: trusty-{{ .Release.Name }}
     spec:
       containers:
-          name: trusty-db
+        - name: trusty-db
           env:
             - name: MARIADB_RANDOM_ROOT_PASSWORD
               value: 'true'
@@ -60,8 +63,8 @@ spec:
           image: 'quay.io/mariadb-foundation/mariadb-devel@sha256:4f0a0ac7ab77966332b4675bc164662499129dac530bc77576a089836030c060'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
-  volumes:
-    - name: trusty-volume-1
-      emptyDir: {}
+      volumes:
+        - name: trusty-volume-1
+          emptyDir: {}
   strategy:
     type: RollingUpdate
