@@ -9,7 +9,7 @@ spec:
   source:
     path: demos/predictive-lifecycle/helm/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
-    targetRevision: HEAD
+    targetRevision: trusty
     helm:
       valuesObject:
         create-model-registry:
