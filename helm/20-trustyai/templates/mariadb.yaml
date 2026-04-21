@@ -60,7 +60,7 @@ spec:
           volumeMounts:
             - name: trusty-volume-1
               mountPath: /var/lib/mysql
-          image: 'quay.io/mariadb-foundation/mariadb-devel:11.8-ubi'
+          image: 'quay.io/mariadb-foundation/mariadb-devel:11.8'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       volumes:
