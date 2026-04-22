@@ -20,4 +20,3 @@ trustyai:
   database:
     user: ''
     password: ''
-    rootPassword: ''

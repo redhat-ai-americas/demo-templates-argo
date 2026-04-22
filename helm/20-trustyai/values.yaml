@@ -4,4 +4,3 @@ cluster-monitoring:
 database:
   user: ''
   password: ''
-  rootPassword: ''

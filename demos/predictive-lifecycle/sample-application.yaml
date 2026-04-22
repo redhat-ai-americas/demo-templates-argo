@@ -26,7 +26,6 @@ spec:
           database:
             user: 'trusty'
             password: 'trustypass'
-            rootPassword: 'trustypass'
         database:
           user: myuser
           password: mypassword
