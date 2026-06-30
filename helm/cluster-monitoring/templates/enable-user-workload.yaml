@@ -4,7 +4,6 @@ metadata:
   name: cluster-monitoring-config
   namespace: openshift-monitoring
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
 data:
   config.yaml: |

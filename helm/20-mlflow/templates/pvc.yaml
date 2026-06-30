@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: mlflow-postgresql-data
+    app.kubernetes.io/component: mlflow-postgresql-data
+    app.kubernetes.io/instance: mlflow-postgresql-data
+    app.kubernetes.io/name: mlflow-postgresql-data
+    app.kubernetes.io/part-of: mlflow-postgresql-data
+    component: mlflow-postgresql-data
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+  name: mlflow-postgresql-data
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

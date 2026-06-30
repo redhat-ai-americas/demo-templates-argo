@@ -4,7 +4,6 @@ metadata:
   name: user-workload-monitoring-config
   namespace: openshift-user-workload-monitoring
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
 data:
   config.yaml: |

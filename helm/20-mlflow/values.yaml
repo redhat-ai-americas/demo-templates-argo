@@ -1,0 +1,15 @@
+minio:
+  enabled: true
+  cluster-url-getter:
+    enabled: false # Redundant with below
+
+  buckets:
+    models: models
+    pipelineArtifacts: pipeline-artifacts
+    rootUser: 'minio'
+    rootPassword: 'minio!23'
+
+database:
+  user: 'mlflowuser'
+  password: 'mlflowpassword'
+  database: 'mlflow'

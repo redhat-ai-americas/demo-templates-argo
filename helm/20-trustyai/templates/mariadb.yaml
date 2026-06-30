@@ -4,7 +4,6 @@ metadata:
   name: trusty-{{ .Release.Name }}
   namespace: trusty
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "21"
   labels:
     app: trusty-{{ .Release.Name }}
@@ -26,7 +25,6 @@ metadata:
   name: trusty-{{ .Release.Name }}
   namespace: trusty
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "21"
   labels:
     app: trusty-{{ .Release.Name }}

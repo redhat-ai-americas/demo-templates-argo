@@ -3,5 +3,4 @@ kind: Namespace
 metadata:
   name: trusty
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "0"
