@@ -9,7 +9,7 @@ spec:
   source:
     path: argo/cluster-url-getter/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
-    targetRevision: HEAD
+    targetRevision: mlflow-mlserver-predictive-demo
     helm: {}
   sources: []
   project: default

@@ -9,7 +9,7 @@ spec:
   source:
     path: demos/predictive-lifecycle/helm/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
-    targetRevision: trusty
+    targetRevision: mlflow-mlserver-predictive-demo
     helm:
       valuesObject:
         create-model-registry:
