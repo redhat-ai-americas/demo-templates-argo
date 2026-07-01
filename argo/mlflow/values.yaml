@@ -1,0 +1,13 @@
+minio:
+  enabled: true
+
+  buckets:
+    models: models
+    pipelineArtifacts: pipeline-artifacts
+    rootUser: ''
+    rootPassword: ''
+
+database:
+  user: ''
+  password: ''
+  database: ''

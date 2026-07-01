@@ -12,6 +12,18 @@ spec:
     targetRevision: mlflow-mlserver-predictive-demo
     helm:
       valuesObject:
+        mlflow:
+          minio:
+            enabled: true
+            buckets:
+              models: models
+              pipelineArtifacts: pipeline-artifacts
+              rootUser: 'minio'
+              rootPassword: 'minio!23'
+          database:
+            user: 'mlflowuser'
+            password: 'mlflowpassword'
+            database: 'mlflow'
         create-model-registry:
           mysql:
             user: registryuser
