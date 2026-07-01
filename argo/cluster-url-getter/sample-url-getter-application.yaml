@@ -7,7 +7,7 @@ spec:
     name: in-cluster
     namespace: hoi-testing
   source:
-    path: helm/cluster-url-getter/
+    path: argo/cluster-url-getter/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
     targetRevision: HEAD
     helm: {}

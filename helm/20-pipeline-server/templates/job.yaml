@@ -4,7 +4,7 @@ metadata:
   name: pipeline-integration-job
   namespace: {{ .Release.Namespace }}
   annotations:
-    argocd.argoproj.io/sync-wave: "21"
+    argocd.argoproj.io/sync-wave: "22"
 spec:
   template:
     spec:
@@ -21,5 +21,5 @@ spec:
             name: pipeline-integration
             defaultMode: 0755
       restartPolicy: Never
-      serviceAccountName: cluster-url-getter-{{ .Release.Namespace }}
+      serviceAccountName: pipeline-server-{{ .Release.Namespace }}
   backoffLimit: 1

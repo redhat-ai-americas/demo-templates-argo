@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-url-getter
+  name: mlflow-application
 spec:
   destination:
     name: in-cluster
     namespace: redhat-ods-applications
   source:
-    path: helm/cluster-url-getter/
+    path: helm/20-mlflow/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
     targetRevision: HEAD
     helm: {}

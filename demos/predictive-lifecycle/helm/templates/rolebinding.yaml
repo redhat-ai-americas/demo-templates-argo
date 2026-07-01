@@ -1,13 +1,13 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: cluster-url-registry-access-{{ .Release.Namespace }}
+  name: pipeline-server-registry-access-{{ .Release.Namespace }}
   namespace: rhoai-model-registries
   annotations:
     argocd.argoproj.io/sync-wave: "110"
 subjects:
   - kind: ServiceAccount
-    name: cluster-url-getter-{{ .Release.Namespace }}
+    name: pipeline-server-{{ .Release.Namespace }}
     namespace: {{ .Release.Namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -17,15 +17,43 @@ roleRef:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: cluster-url-inference-access-{{ .Release.Namespace }}
+  name: pipeline-server-inference-access-{{ .Release.Namespace }}
   namespace: {{ .Release.Namespace }}
   annotations:
     argocd.argoproj.io/sync-wave: "110"
+subjects:
+  - kind: ServiceAccount
+    name: pipeline-server-{{ .Release.Namespace }}
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: inference-ability
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: dspa-mlflow-integration
+  namespace: {{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: pipeline-runner-dspa
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: mlflow-operator-mlflow-integration
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: dspa-mlflow-integration
+  namespace: {{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount
     name: build-model
     namespace: {{ .Release.Namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: inference-ability
+  kind: ClusterRole
+  name: mlflow-operator-mlflow-integration

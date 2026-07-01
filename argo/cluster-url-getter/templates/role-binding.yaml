@@ -4,7 +4,6 @@ metadata:
   name: cluster-url-getter-{{ .Release.Namespace }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
 subjects:
   - kind: ServiceAccount
@@ -21,7 +20,6 @@ metadata:
   name: cluster-url-getter-{{ .Release.Namespace }}
   namespace: openshift-console
   annotations:
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
 subjects:
   - kind: ServiceAccount
@@ -38,8 +36,7 @@ metadata:
   name: cluster-url-getter2-{{ .Release.Namespace }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-10"
+    argocd.argoproj.io/sync-wave: "0"
 subjects:
   - kind: ServiceAccount
     name: cluster-url-getter-{{ .Release.Namespace }}

@@ -4,3 +4,5 @@ cluster-monitoring:
 database:
   user: ''
   password: ''
+
+trustyPython: true

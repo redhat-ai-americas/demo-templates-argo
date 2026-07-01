@@ -6,10 +6,20 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "21"
 spec:
-  data: {}
   metrics:
     schedule: 5s
+{{ if .Values.trustyPython -}}
+  storage:
+    format: "PVC"
+    folder: "/inputs"
+    size: "1Gi"
+  data:
+    filename: "data.csv"
+    format: "CSV"
+{{ else -}}
+  data: {}
   storage:
     databaseConfigurations: db-credentials
     format: DATABASE
     size: 1Gi
+{{ end -}}

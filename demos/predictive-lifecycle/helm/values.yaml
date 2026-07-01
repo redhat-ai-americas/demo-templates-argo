@@ -1,7 +1,3 @@
-minio:
-  cluster-url-getter:
-    enabled: false  # This only applies to the copy of the url-getter in the subhcart, not the direct dependency.
-
 workbench:
   image: s2i-generic-data-science-notebook:2025.2
   imageDisplayName: Jupyter | Data Science | CPU | Python 3.12
