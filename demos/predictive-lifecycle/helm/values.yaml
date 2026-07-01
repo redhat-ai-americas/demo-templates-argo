@@ -13,6 +13,8 @@ database:
     type: DECIMAL
 
 trustyai:
+  cluster-monitoring:
+    enabled: false
   database:
     user: ''
     password: ''
