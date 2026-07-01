@@ -8,7 +8,7 @@ metadata:
 spec:
   metrics:
     schedule: 5s
-{{ if .Values.trustyPython -}}
+{{- if .Values.trustyPython }}
   storage:
     format: "PVC"
     folder: "/inputs"
@@ -16,10 +16,10 @@ spec:
   data:
     filename: "data.csv"
     format: "CSV"
-{{ else -}}
+{{- else }}
   data: {}
   storage:
     databaseConfigurations: db-credentials
     format: DATABASE
     size: 1Gi
-{{ end -}}
+{{- end }}
