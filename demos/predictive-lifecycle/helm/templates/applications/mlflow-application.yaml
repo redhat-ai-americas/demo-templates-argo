@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: redhat-ods-applications
+    namespace: mlflow
   source:
     path: argo/mlflow/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git

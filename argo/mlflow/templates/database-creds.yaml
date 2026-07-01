@@ -2,7 +2,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: mlflow-db-credentials
-  namespace: {{ .Release.Namespace }}
+  namespace: redhat-ods-applications
   annotations:
     argocd.argoproj.io/sync-wave: "20"
 data:

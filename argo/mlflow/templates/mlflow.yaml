@@ -2,7 +2,7 @@ apiVersion: mlflow.opendatahub.io/v1
 kind: MLflow
 metadata:
   name: mlflow
-  namespace: {{ .Release.Namespace }}
+  namespace: redhat-ods-applications
   annotations:
     argocd.argoproj.io/sync-wave: "20"
 spec:
