@@ -18,3 +18,7 @@ trustyai:
   database:
     user: ''
     password: ''
+
+mlflow:
+  minio:
+    enabled: true
