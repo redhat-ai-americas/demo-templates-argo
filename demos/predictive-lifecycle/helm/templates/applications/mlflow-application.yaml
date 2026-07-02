@@ -12,7 +12,7 @@ spec:
   source:
     path: argo/mlflow/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
-    targetRevision: mlflow-mlserver-predictive-demo
+    targetRevision: HEAD
     helm:
       valuesObject:
         minioNamespace: {{ .Release.Namespace }}
