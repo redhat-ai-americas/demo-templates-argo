@@ -15,6 +15,7 @@ spec:
     targetRevision: mlflow-mlserver-predictive-demo
     helm:
       valuesObject:
+        minioNamespace: {{ .Release.Namespace }}
         {{- .Values.mlflow | toYaml | nindent 8 }}
   sources: []
   project: default
