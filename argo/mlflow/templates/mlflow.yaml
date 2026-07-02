@@ -1,0 +1,17 @@
+apiVersion: mlflow.opendatahub.io/v1
+kind: MLflow
+metadata:
+  name: mlflow
+  namespace: redhat-ods-applications
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  replicas: 1
+  backendStoreUriFrom:
+    name: mlflow-db-credentials
+    key: backend-store-uri
+  artifactsDestination: "s3://{{ .Values.minio.buckets.models }}/mlflow-artifacts"
+  serveArtifacts: true
+  envFrom:
+    - secretRef:
+        name: mlflow-models

@@ -1,0 +1,13 @@
+minioNamespace: ''
+minio:
+  enabled: true
+
+  buckets:
+    models: models
+    rootUser: ''
+    rootPassword: ''
+
+database:
+  user: ''
+  password: ''
+  database: ''

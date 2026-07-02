@@ -1,16 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-url-getter
+  name: mlflow-application
 spec:
   destination:
     name: in-cluster
-    namespace: hoi-testing
+    namespace: redhat-ods-applications
   source:
-    path: helm/cluster-url-getter/
+    path: helm/20-mlflow/
     repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
     targetRevision: HEAD
-    helm: {}
+    helm:
+      valuesObject:
+        minio:
+          enabled: true
+          buckets:
+            models: models
+            rootUser: 'minio'
+            rootPassword: 'minio!23'
+        database:
+          user: 'mlflowuser'
+          password: 'mlflowpassword'
+          database: 'mlflow'
   sources: []
   project: default
   syncPolicy:

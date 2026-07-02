@@ -1,0 +1,10 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mlflow-db-credentials
+  namespace: redhat-ods-applications
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+data:
+  backend-store-uri: {{ printf "postgresql://%s:%s@mlflow-postgresql.%s.svc.cluster.local:5432/%s?sslmode=disable" .Values.database.user .Values.database.password .Release.Namespace .Values.database.database | b64enc }}
+type: Opaque

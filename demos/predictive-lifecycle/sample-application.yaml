@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: predictive-lifecycle
+  namespace: openshift-gitops
 spec:
   destination:
     name: in-cluster
@@ -12,6 +13,17 @@ spec:
     targetRevision: HEAD
     helm:
       valuesObject:
+        mlflow:
+          minio:
+            enabled: true
+            buckets:
+              models: models
+              rootUser: *rootUser
+              rootPassword: *rootPassword
+          database:
+            user: 'mlflowuser'
+            password: 'mlflowpassword'
+            database: 'mlflow'
         create-model-registry:
           mysql:
             user: registryuser
@@ -20,8 +32,12 @@ spec:
             root_password: registrypass
         minio:
           buckets:
-            rootUser: minio
-            rootPassword: minio!23
+            rootUser: &rootUser minio
+            rootPassword: &rootPassword minio!23
+        trustyai:
+          database:
+            user: 'trusty'
+            password: 'trustypass'
         database:
           user: myuser
           password: mypassword

@@ -14,9 +14,7 @@ spec:
     deploy: true
     artifactSignedURLExpirySeconds: 60
     enableSamplePipeline: false
-    managedPipelines:
-      instructLab:
-        state: Removed
+    managedPipelines: {}
     enableOauth: true
     cacheEnabled: true
     pipelineStore: database

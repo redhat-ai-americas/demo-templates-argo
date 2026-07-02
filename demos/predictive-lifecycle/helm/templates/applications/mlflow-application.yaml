@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlflow-application
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  destination:
+    name: in-cluster
+    namespace: mlflow
+  source:
+    path: argo/mlflow/
+    repoURL: https://github.com/redhat-ai-americas/demo-templates-argo.git
+    targetRevision: HEAD
+    helm:
+      valuesObject:
+        minioNamespace: {{ .Release.Namespace }}
+        {{- .Values.mlflow | toYaml | nindent 8 }}
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 10
+      backoff:
+        duration: 10s
+        factor: 3
+        maxDuration: 30m
+    managedNamespaceMetadata:
+      labels:
+        argocd.argoproj.io/managed-by: openshift-gitops
