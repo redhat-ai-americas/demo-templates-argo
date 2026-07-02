@@ -18,9 +18,8 @@ spec:
             enabled: true
             buckets:
               models: models
-              pipelineArtifacts: pipeline-artifacts
-              rootUser: 'minio'
-              rootPassword: 'minio!23'
+              rootUser: *rootUser
+              rootPassword: *rootPassword
           database:
             user: 'mlflowuser'
             password: 'mlflowpassword'
@@ -33,8 +32,8 @@ spec:
             root_password: registrypass
         minio:
           buckets:
-            rootUser: minio
-            rootPassword: minio!23
+            rootUser: &rootUser minio
+            rootPassword: &rootPassword minio!23
         trustyai:
           database:
             user: 'trusty'

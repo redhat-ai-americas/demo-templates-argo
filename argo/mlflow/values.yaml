@@ -3,7 +3,6 @@ minio:
 
   buckets:
     models: models
-    pipelineArtifacts: pipeline-artifacts
     rootUser: ''
     rootPassword: ''
 

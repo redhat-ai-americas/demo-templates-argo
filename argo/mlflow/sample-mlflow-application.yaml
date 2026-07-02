@@ -16,7 +16,6 @@ spec:
           enabled: true
           buckets:
             models: models
-            pipelineArtifacts: pipeline-artifacts
             rootUser: 'minio'
             rootPassword: 'minio!23'
         database:
