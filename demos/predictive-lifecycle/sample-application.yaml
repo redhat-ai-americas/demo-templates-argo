@@ -18,8 +18,8 @@ spec:
             enabled: true
             buckets:
               models: models
-              rootUser: *rootUser
-              rootPassword: *rootPassword
+              rootUser: minio
+              rootPassword: minio!23
           database:
             user: 'mlflowuser'
             password: 'mlflowpassword'
